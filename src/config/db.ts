@@ -1,26 +1,29 @@
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://ajjubhai:45zxh6cSWOnztLLC@cluster0.6meed2q.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
+
+const { MongoClient, ServerApiVersion } = require('mongodb');
+
+const url = "mongodb+srv://ajjubhai:45zxh6cSWOnztLLC@cluster0.6meed2q.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+
+const dbName = 'astro_trade_db';    // Replace with your database name
+
+const client = new MongoClient(url, {
   serverApi: {
-    version: ServerApiVersion.v1,
+    version:ServerApiVersion.v1,
     strict: true,
     deprecationErrors: true,
   }
 });
 
-async function run() {
+export async function connect() {
   try {
-    // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
+    console.log('Connected to MongoDB');
+    const db = client.db(dbName);
+    return db;  // Return the DB instance if you need to perform any operations
+  } catch (error) {
+    console.error('Error connecting to MongoDB', error);
+    process.exit(1);  // Exit the process in case of connection failure
   }
 }
-run().catch(console.dir);
+
