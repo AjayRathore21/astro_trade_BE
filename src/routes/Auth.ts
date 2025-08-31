@@ -1,4 +1,4 @@
-const express = require("express");
+import express from "express";
 
 import { Request, Response } from "express";
 
@@ -18,4 +18,4 @@ router.post("/register", (req: Request, res: Response) => {
   res.send("Register endpoint");
 });
 
-module.exports = router;
+export default router;

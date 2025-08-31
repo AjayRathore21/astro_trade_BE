@@ -4,9 +4,10 @@ import { connect } from "./config/db";
 import appConfig from "./config/AppConfig";
 const app = express();
 const PORT = appConfig.port;
-const authRouter = require("./routes/Auth");
+import authRouter from "./routes/Auth";
 
-const db = connect();
+connect();
+
 app.get("/", async (req, res) => {
   res.send("Express server is running and connected to MongoDB");
 });
