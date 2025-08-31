@@ -1,4 +1,5 @@
-const { MongoClient, ServerApiVersion } = require("mongodb");
+
+import { MongoClient, ServerApiVersion } from "mongodb";
 import appConfig from "./AppConfig";
 
 const url = appConfig.mongoUrl;
